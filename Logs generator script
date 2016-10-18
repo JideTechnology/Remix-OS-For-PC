@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/system/bin/sh
 #SET VARS REGARDING THE PATH TO THE NTFS PARTITION
 ntfs_path=`find /storage -type d -iname 'system volume information' 2> /dev/null | head -1`
 ntfs_path=${ntfs_path%/*}
@@ -22,10 +22,10 @@ cpuinfo="cpuinfo_${model}_${version}_${system_arch}_$(date +%F_%R).txt"
 echo
 echo "Dumping log files, please wait..."
 #CREATE A FOLDERS FOR THE LOGS (X/RemixOS-Logs)
-mkdir -p $ntfs_path && mkdir -p $remix_path
+mkdir -p $ntfs_path $remix_path
 #DUMP THE LOGS TO $ntfs_path AND COPY THEM TO $remix_path
 dmesg >  $ntfs_path/$dmesg && lspci > /$ntfs_path/$lspci && logcat -d > /$ntfs_path/$logcat && lsusb > $ntfs_path/$lsusb && cat /proc/cpuinfo > /$ntfs_path/$cpuinfo
-cp $ntfs_path/$dmesg $remix_path && cp $ntfs_path/$lspci $remix_path && cp $ntfs_path/$logcat $remix_path && cp $ntfs_path/$lsusb $remix_path && cp $ntfs_path/$cpuinfo $remix_path
+cp $ntfs_path/$dmesg $ntfs_path/$lspci $ntfs_path/$logcat $ntfs_path/$lsusb $ntfs_path/$cpuinfo $remix_path
 
 echo "Dump complete"
 echo 
