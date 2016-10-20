@@ -11,7 +11,7 @@ cpuinfo="cpuinfo_boot-complete_${model}_${version}_${system_arch}_$(date +%F_%H-
 # WELCOME MESSAGE
 print "\nRemix Log Dumper v0.6\n\nLogs will be dumped into 2 locations:\n\n1. /sdcard/RemixOS-logs - Remix File Manager has /sdcard named as My Remix.\n2. /RemixOS/RemixOS-logs - directory created on the storage medium RemixOS is installed on.\n\nDumping log files to /sdcard/RemixOS-logs, please wait...\n"
 # ACTUAL DUMPING
-# SAVING TO INTERNAL REMIX STORAGE - /sdcard/logs
+# SAVING TO INTERNAL REMIX STORAGE
 remix_sdcard_path="/sdcard/RemixOS-logs"
 mkdir -p $remix_sdcard_path
 dmesg >  $remix_sdcard_path/$dmesg
