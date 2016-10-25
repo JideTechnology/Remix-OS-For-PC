@@ -1,0 +1,83 @@
+#! /system/bin/sh
+# Remix OS Log Tool v0.2
+# Prerequisites: modified initrd.img (with custom init script - https://goo.gl/i8yFOO )
+# Saves to: 
+# /sdcard/RemixOS_Logs/Automatic
+# X:/$RemixOS-folder/RemixOS_Logs/Automatic 
+# REMIX_OS:/RemixOS_Logs/Automatic - if booted from USB
+
+# If prerequisites OK, then we need to add the script to one of Android init scripts in order to make it run automatically.
+# Automatic old logs removal is handled by the custom initrd/init script.
+
+print '\n\t\tRemix OS Log Tool v0.2\n\n\t\tSaving logs please wait...\n'
+
+# Log naming
+model=$(getprop ro.product.model)
+version=$(getprop ro.build.remixos.version)
+system_arch=$(getprop ro.product.cpu.abi)
+logcat="logcat_boot-complete_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+dmesg="dmesg_boot-complete_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+lspci="lspci_boot-complete_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+lsusb="lsusb_boot-complete_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+cpuinfo="cpuinfo_boot-complete_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+
+# Change to RemixOS_Logs/Automatic if we add it to boot process
+logs_src="RemixOS_Logs"
+logs_sdcard="/sdcard/$logs_src"
+
+# ACTUAL DUMPING
+mkdir -p $logs_sdcard
+dmesg >  $logs_sdcard/$dmesg
+lspci > $logs_sdcard/$lspci 
+logcat -d > $logs_sdcard/$logcat
+lsusb > $logs_sdcard/$lsusb
+cat /proc/cpuinfo > $logs_sdcard/$cpuinfo
+
+# Get native partition info and install directory for further steps
+native_partition_path=$(cat /native_partition_path)
+if [[ -n "$native_partition_path" ]]; then
+	native_partition_uuid=$(cat /native_partition_uuid)
+	native_partition_mountpoint=$(mount | grep /storage/$native_partition_uuid | awk '{print $3}')
+	native_partition_remix_dir=$(cat /native_partition_remix_dir)
+fi
+# Check if booted from usb
+usb_boot_win_partition_path=$(cat /usb_boot_win_partition_path 2>/dev/null)
+if [[ -n "$usb_boot_win_partition_path" ]]; then
+	usb_boot_win_partition_uuid=$(cat /usb_boot_win_partition_uuid)
+	usb_boot_win_partition_mountpoint=$(mount | grep /storage/$usb_boot_win_partition_uuid | awk '{print $3}')
+fi
+# Make sure logs are copied onto native partition (specially important for Windows users)
+# Need to inability to copy scenario
+if  [[ -n "$native_partition_mountpoint" ]]; then
+	logs_native="$native_partition_mountpoint/$native_partition_remix_dir/$logs_src"
+	mkdir -p $logs_native
+	cp $logs_sdcard/$dmesg $logs_native $logs_sdcard/$lspci $logs_native $logs_sdcard/$logcat $logs_native $logs_sdcard/$lsusb $logs_native $logs_sdcard/$cpuinfo $logs_native 2>/dev/null
+	else 
+		mkdir /storage/$native_partition_uuid
+		ntfs-3g $native_partition_path /storage/$native_partition_uuid
+		mount $native_partition_path /storage/$native_partition_uuid
+		logs_native="/storage/$native_partition_uuid/$native_partition_remix_dir/$logs_src"
+		mkdir -p $logs_native
+		cp $logs_sdcard/$dmesg $logs_native $logs_sdcard/$lspci $logs_native $logs_sdcard/$logcat $logs_native $logs_sdcard/$lsusb $logs_native $logs_sdcard/$cpuinfo $logs_native 2>/dev/null
+fi
+# If booted from usb, make sure logs are copied to the REMIX_OS partition - windows friendly.
+if [[ -n "$usb_boot_win_partition_path" ]]; then
+	if [[ -n "$usb_boot_win_partition_mountpoint" ]]; then
+		logs_usb_win="$usb_boot_win_partition_mountpoint/$logs_src"
+		mkdir -p $logs_usb_win
+		cp $logs_sdcard/$dmesg $logs_usb_win $logs_sdcard/$lspci $logs_usb_win $logs_sdcard/$logcat $logs_usb_win $logs_sdcard/$lsusb $logs_usb_win $logs_sdcard/$cpuinfo $logs_usb_win 2>/dev/null
+		else 
+			mkdir /storage/$usb_boot_win_partition_uuid
+			ntfs-3g $usb_boot_win_partition_path /storage/$usb_boot_win_partition_uuid
+			mount $usb_boot_win_partition_path /storage/$usb_boot_win_partition_uuid
+			logs_usb_win="/storage/$usb_boot_win_partition_uuid/$logs_src"
+			mkdir -p $logs_usb_win
+			cp $logs_sdcard/$dmesg $logs_usb_win $logs_sdcard/$lspci $logs_usb_win $logs_sdcard/$logcat $logs_usb_win $logs_sdcard/$lsusb $logs_usb_win $logs_sdcard/$cpuinfo $logs_usb_win 2>/dev/null
+	fi
+fi
+#
+print "\t\tLogs should be saved in the following locations:\n\n\t1. $logs_sdcard\n\tCheck 'My Remix' tab in the File Manager app to find RemixOS_Logs folder with all the logs.\n\tIf you booted in guest mode, remember that logs will be lost upon restart.\n\n\t2. $logs_native\n\tLook for /$native_partition_remix_dir directory on the partition where you installed Remix.\nIn some cases, logs might not be saved in this folder, if so, use the other listed location.\n"
+if [[ -n "$usb_boot_win_partition_path" ]]; then
+	print "\n\t3. REMIX_OS:/$logs_src\n\tIf you've booted from removable storage (USB/SDcard) look for a partition labeled REMIX_OS"
+fi
+print "\tIf you have feedback for us, be sure to visit our Remix-OS-For-PC GitHub repository and use the new logs there.\n\tRemix-OS-For-PC GitHub repository: https://goo.gl/ulxY75\n"
