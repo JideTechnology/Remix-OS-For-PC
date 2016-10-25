@@ -1,6 +1,6 @@
 #! /system/bin/sh
 # Remix OS Log Tool v0.1 - only to /sdcard/RemixOS_Logs
-print '\nRemix OS Log Tool v0.1\n\nSaving logs please wait...\n'
+print '\n\tRemix OS Log Tool v0.1\n\n\tSaving logs please wait...\n'
 
 #SET VARS FOR LOGFILE NAMING in format: <LOGTYPE>_BOOT-COMPLETE_<DEVICE MODEL>_<REMIX VERSION>_<REMIX ARCH>_<DATE>.TXT
 model=$(getprop ro.product.model)
@@ -22,4 +22,4 @@ logcat -d > $logs_path/$logcat
 lsusb > $logs_path/$lsusb
 cat /proc/cpuinfo > $logs_path/$cpuinfo
 
-print 'Logs were successfully saved.\n\nCheck "My Remix" tab in the File Manager app to find RemixOS_Logs folder with all the logs.\nFull path of the logs folder is: /sdcard/RemixOS_Logs \n\nIf you have feedback for us, be sure to visit our Remix-OS-For-PC GitHub repository and use the new logs there.\nRemix-OS-For-PC GitHub repository: https://goo.gl/ulxY75'
+print '\tLogs were successfully saved.\n\n\tCheck "My Remix" tab in the File Manager app to find RemixOS_Logs folder with all the logs.\n\tFull path of the logs folder is: /sdcard/RemixOS_Logs \n\n\tIf you have feedback for us, be sure to visit our Remix-OS-For-PC GitHub repository and use the new logs there.\n\tRemix-OS-For-PC GitHub repository: https://goo.gl/ulxY75\n'
