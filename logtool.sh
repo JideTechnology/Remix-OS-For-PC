@@ -3,7 +3,7 @@
 # Thanks a lot to Mohamed for thoroughly testing with me! I owe you moman2000 ! (XDA Forum user)
 #
 # Prerequisites: 
-# - modified initrd.img (with custom init script - https://goo.gl/N5kXvV )
+# - modified initrd.img (with custom init script - https://goo.gl/DSkjXT )
 # - running as root ex. sh /path/to/logtool.sh
 #
 # Features: 
