@@ -33,7 +33,7 @@ lsusb="lsusb_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%
 cpuinfo="cpuinfo_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 
 # Set logs location for Internal Storage
-logs_src="RemixOS_Logs/Usergenerated"
+logs_src="RemixOS_Logs/Usergenerated/${brand}_${model}"
 logs_sdcard="/storage/emulated/0/$logs_src" && mkdir -p $logs_sdcard
 
 # Dump the logs
@@ -78,11 +78,11 @@ if [[ -n "$removable_boot_win_partition_path" ]]; then
 	fi
 fi
 
-print "\tDone. Few logs files were saved with names like:\n\t$dmesg\n\n\tYou can find the logs in $logs_src directory in few locations:\n\n\t1. Internal Storage - Remix OS path: $logs_sdcard\n\tCheck 'My Remix'(/storage/emulated/0) tab in the File Manager app to find the given path.\t"
+print "\tDone. Few logs files were saved with names like:\n\t$dmesg\n\n\tYou can find the logs in $logs_src directory in few locations:\n\n\t1. Internal Storage - Remix OS full path: $logs_sdcard\n\tCheck 'My Remix'(/storage/emulated/0) tab in the File Manager app to find the given path.\t"
 if [[ "$DATA_IN_MEM" -eq 1 ]]; then
 	print "\tWARNING!!! Currently system runs in GUEST mode - logs saved to this location will be lost upon restart."
 fi
-print "\n\t2. Remix OS installation folder - Remix OS path: $logs_native\n\tLook for the logs on the disk on which you installed Remix OS."
+print "\n\t2. Remix OS installation folder - Remix OS full path: $logs_native\n\tLook for the logs on the disk on which you installed Remix OS."
 if [[ -n "$removable_boot_win_partition_path" ]]; then
 	print "\n\t3. Windows friendly partition - Windows path: REMIX_OS:/$logs_src"
 fi
