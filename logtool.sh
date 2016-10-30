@@ -22,14 +22,15 @@ source /boot_info
 print '\n\tRemix OS Log Tool v0.4\n\n\tSaving logs please wait...\n'
 
 # Log naming
+brand=$(getprop ro.product.manufacturer) && brand=${brand// /-}
 model=$(getprop ro.product.model) && model=${model// /-}
 version=$(getprop ro.build.remixos.version) && version=${version// /-}
 system_arch=$(getprop ro.product.cpu.abi) && system_arch=${system_arch// /-}
-logcat="logcat_BOOT_COMPLETE_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-dmesg="dmesg_BOOT_COMPLETE_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-lspci="lspci_BOOT_COMPLETE_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-lsusb="lsusb_BOOT_COMPLETE_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-cpuinfo="cpuinfo_BOOT_COMPLETE_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+logcat="logcat_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+dmesg="dmesg_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+lspci="lspci_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+lsusb="lsusb_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+cpuinfo="cpuinfo_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 
 # Set logs location for Internal Storage
 logs_src="RemixOS_Logs/Usergenerated"
