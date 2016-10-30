@@ -4,15 +4,16 @@
 # Run using: sh /path/to/logtool_basic.sh
 print '\n\tRemix OS Log Tool Basic v0.2\n\n\tSaving logs please wait...\n'
 
-#SET VARS FOR LOGFILE NAMING in format: <LOGTYPE>_BOOT-COMPLETE_<DEVICE MODEL>_<REMIX VERSION>_<REMIX ARCH>_<DATE>.TXT
+#SET VARS FOR LOGFILE NAMING in format: <LOGTYPE>_BOOT-COMPLETE_<DEVICE BRAND>_<DEVICE MODEL>_<REMIX VERSION>_<REMIX ARCH>_<DATE>.TXT
+brand=$(getprop ro.product.manufacturer) && brand=${brand// /-}
 model=$(getprop ro.product.model) && model=${model// /-}
 version=$(getprop ro.build.remixos.version) && version=${version// /-}
 system_arch=$(getprop ro.product.cpu.abi) && system_arch=${system_arch// /-}
-logcat="logcat_BOOT-COMPLETE_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-dmesg="dmesg_BOOT-COMPLETE_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-lspci="lspci_BOOT-COMPLETE_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-lsusb="lsusb_BOOT-COMPLETE_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-cpuinfo="cpuinfo_BOOT-COMPLETE_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+logcat="logcat_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+dmesg="dmesg_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+lspci="lspci_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+lsusb="lsusb_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+cpuinfo="cpuinfo_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 
 # ACTUAL DUMPING
 # SAVING TO INTERNAL REMIX STORAGE
