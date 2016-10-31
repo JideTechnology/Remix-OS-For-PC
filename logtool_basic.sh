@@ -17,7 +17,7 @@ lsusb="lsusb_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%
 cpuinfo="cpuinfo_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 
 # SAVING TO INTERNAL REMIX STORAGE
-logs_path="/storage/emulated/0/RemixOS_Logs/Usergenerated/${brand}_${model}"
+logs_path="/data/media/0/RemixOS_Logs/Usergenerated/${brand}_${model}"
 mkdir -p $logs_path
 # ACTUAL DUMPING
 dmesg >  $logs_path/$dmesg
@@ -26,4 +26,4 @@ logcat -d > $logs_path/$logcat
 lsusb > $logs_path/$lsusb
 cat /proc/cpuinfo > $logs_path/$cpuinfo
 
-print "\tDone. Few log files were saved with names like:\n\t$dmesg\n\n\tYou can find the logs in RemixOS_Logs/Usergenerated/${brand}_${model} directory on:\n\n\t1. Internal Storage - Remix OS full path: $logs_path\n\tCheck 'My Remix'(/storage/emulated/0) tab in the File Manager app to find the given path.\n\n\tIf you have feedback for us, be sure to visit our Remix-OS-For-PC GitHub repository and use the new logs there.\n\tRemix-OS-For-PC GitHub repository: https://goo.gl/ulxY75\n"
+print "\tDone. Few log files were saved with names like:\n\t$dmesg\n\n\tYou can find the logs in RemixOS_Logs/Usergenerated/${brand}_${model} directory on:\n\n\t1. Internal Storage - Remix OS full path: $logs_path\n\tCheck 'My Remix'(/data/media/0) tab in the File Manager app to find the given path.\n\n\tIf you have feedback for us, be sure to visit our Remix-OS-For-PC GitHub repository and use the new logs there.\n\tRemix-OS-For-PC GitHub repository: https://goo.gl/ulxY75\n"
