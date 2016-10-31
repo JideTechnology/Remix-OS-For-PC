@@ -8,15 +8,17 @@
 #
 # Features: 
 # Saves dmesg,logcat,lspci,lsusb,cpuinfo to 3 locations: 
-# - /storage/emulated/0/RemixOS_Logs/Usergenerated
+# - /data/media/0/RemixOS_Logs/Usergenerated
 # - X:/$native_partition_remix_dir/RemixOS_Logs/Usergenerated 
 # - REMIX_OS:/RemixOS_Logs/Usergenerated - if booted from removable media
 
 # Remove below comment to see script running line-by-line, command-by-command in terminal
 # set -x
-mkdir -p /storage/emulated/0/RemixOS_Logs
+
+/data/media/0/
+mkdir -p /data/media/0/RemixOS_Logs
 # Comment below line to set error output into terminal
-exec 2> /storage/emulated/0/RemixOS_Logs/Logtool_errors.log
+exec 2> /data/media/0/RemixOS_Logs/Logtool_errors.log
 source /boot_info
 
 print '\n\tRemix OS Log Tool v0.4\n\n\tSaving logs please wait...\n'
@@ -34,7 +36,7 @@ cpuinfo="cpuinfo_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(dat
 
 # Set logs location for Internal Storage
 logs_src="RemixOS_Logs/Usergenerated/${brand}_${model}"
-logs_sdcard="/storage/emulated/0/$logs_src" && mkdir -p $logs_sdcard
+logs_sdcard="/data/media/0/$logs_src" && mkdir -p $logs_sdcard
 
 # Dump the logs
 dmesg >  $logs_sdcard/$dmesg
@@ -78,7 +80,7 @@ if [[ -n "$removable_boot_win_partition_path" ]]; then
 	fi
 fi
 
-print "\tDone. Few logs files were saved with names like:\n\t$dmesg\n\n\tYou can find the logs in $logs_src directory in few locations:\n\n\t1. Internal Storage - Remix OS full path: $logs_sdcard\n\tCheck 'My Remix'(/storage/emulated/0) tab in the File Manager app to find the given path.\t"
+print "\tDone. Few logs files were saved with names like:\n\t$dmesg\n\n\tYou can find the logs in $logs_src directory in few locations:\n\n\t1. Internal Storage - Remix OS full path: $logs_sdcard\n\tCheck 'My Remix'(/data/media/0) tab in the File Manager app to find the given path.\t"
 if [[ "$DATA_IN_MEM" -eq 1 ]]; then
 	print "\tWARNING!!! Currently system runs in GUEST mode - logs saved to this location will be lost upon restart."
 fi
@@ -88,4 +90,3 @@ if [[ -n "$removable_boot_win_partition_path" ]]; then
 fi
 
 print "\n\tIf you have feedback for us, be sure to visit our Remix-OS-For-PC GitHub repository and use the new logs there.\n\tRemix-OS-For-PC GitHub repository: https://goo.gl/ulxY75\n"
-
