@@ -15,7 +15,6 @@
 # Remove below comment to see script running line-by-line, command-by-command in terminal
 # set -x
 
-/data/media/0/
 mkdir -p /data/media/0/RemixOS_Logs
 # Comment below line to set error output into terminal
 exec 2> /data/media/0/RemixOS_Logs/Logtool_errors.log
