@@ -12,6 +12,7 @@ system_arch=$(getprop ro.product.cpu.abi) && system_arch=${system_arch// /-}
 # Log naming
 logcat="logcat_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 dmesg="dmesg_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+lsmod="lsmod_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 lspci="lspci_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 lsusb="lsusb_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 cpuinfo="cpuinfo_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
@@ -21,6 +22,7 @@ logs_path="/data/media/0/RemixOS_Logs/Usergenerated/${brand}_${model}"
 mkdir -p $logs_path
 # ACTUAL DUMPING
 dmesg > $logs_path/$dmesg
+lsmod > $logs_path/$lsmod
 lspci > $logs_path/$lspci
 logcat -d > $logs_path/$logcat
 lsusb > $logs_path/$lsusb

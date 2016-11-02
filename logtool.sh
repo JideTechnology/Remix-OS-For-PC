@@ -29,6 +29,7 @@ version=$(getprop ro.build.remixos.version) && version=${version// /-}
 system_arch=$(getprop ro.product.cpu.abi) && system_arch=${system_arch// /-}
 logcat="logcat_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 dmesg="dmesg_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+lsmod="lsmod_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 lspci="lspci_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 lsusb="lsusb_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
 cpuinfo="cpuinfo_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
@@ -39,6 +40,7 @@ logs_sdcard="/data/media/0/$logs_src" && mkdir -p $logs_sdcard
 
 # Dump the logs
 dmesg > $logs_sdcard/$dmesg
+lsmod > $logs_path/$lsmod
 lspci > $logs_sdcard/$lspci
 logcat -d > $logs_sdcard/$logcat
 lsusb > $logs_sdcard/$lsusb
