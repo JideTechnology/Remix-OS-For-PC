@@ -20,8 +20,8 @@ cpuinfo="cpuinfo_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(dat
 logs_path="/data/media/0/RemixOS_Logs/Usergenerated/${brand}_${model}"
 mkdir -p $logs_path
 # ACTUAL DUMPING
-dmesg >  $logs_path/$dmesg
-lspci > $logs_path/$lspci 
+dmesg > $logs_path/$dmesg
+lspci > $logs_path/$lspci
 logcat -d > $logs_path/$logcat
 lsusb > $logs_path/$lsusb
 cat /proc/cpuinfo > $logs_path/$cpuinfo
