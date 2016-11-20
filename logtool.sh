@@ -40,7 +40,7 @@ logs_sdcard="/storage/emulated/0/$logs_src" && mkdir -p $logs_sdcard
 
 # Dump the logs
 dmesg > $logs_sdcard/$dmesg
-lsmod > $logs_path/$lsmod
+lsmod > $logs_sdcard/$lsmod
 lspci > $logs_sdcard/$lspci
 logcat -d > $logs_sdcard/$logcat
 lsusb > $logs_sdcard/$lsusb
