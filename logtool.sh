@@ -81,13 +81,13 @@ if [[ -n "$removable_boot_win_partition_path" ]]; then
 	fi
 fi
 
-print "\tDone. Few logs files were saved with names like:\n\t$dmesg\n\n\tYou can find the logs in ${brand}_${model} directory in few locations:\n\n\t1. Internal Storage - Remix OS full path:\n$logs_sdcard\n\tCheck 'My Remix'(/storage/emulated/0) tab in the File Manager app to find the given path.\t"
+print "\tDone. Few logs files were saved with names like:\n\t$dmesg\n\n\tYou can find the logs in ${brand}_${model} directory in few locations:\n\n\t1. Internal Storage - Remix OS full path:\n\t$logs_sdcard\n\tCheck 'My Remix'(/storage/emulated/0) tab in the File Manager app to find the given path.\t"
 if [[ "$DATA_IN_MEM" -eq 1 ]]; then
 	print "\tWARNING!!! Currently system runs in GUEST mode - logs saved to this location will be lost upon restart."
 fi
-print "\n\t2. Remix OS installation folder - Remix OS full path:\n$logs_native\n\tLook for the logs on the disk on which you installed Remix OS."
+print "\n\t2. Remix OS installation folder - Remix OS full path:\n\t$logs_native\n\tLook for the logs on the disk on which you installed Remix OS."
 if [[ -n "$removable_boot_win_partition_path" ]]; then
-	print "\n\t3. Windows friendly partition - Windows path:\nREMIX_OS:/$logs_src"
+	print "\n\t3. Windows friendly partition - Windows path:\n\tREMIX_OS:/$logs_src"
 fi
 
 print "\n\tIf you have feedback for us, be sure to visit our Remix-OS-For-PC GitHub repository and use the new logs there.\n\tRemix-OS-For-PC GitHub repository: https://goo.gl/ulxY75\n"
