@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Remix OS Log Tool v0.41 by Vioner
+# Remix OS Log Tool v0.42 by Vioner
 # Thanks a lot to Mohamed for thoroughly testing with me! I owe you moman2000 ! (XDA Forum user)
 #
 # Prerequisites:
@@ -20,7 +20,7 @@ mkdir -p /storage/emulated/0/RemixOS_Logs
 exec 2> /storage/emulated/0/RemixOS_Logs/Logtool_errors.log
 source /boot_info
 
-print '\n\tRemix OS Log Tool v0.41\n\n\tSaving logs please wait...\n'
+print '\n\tRemix OS Log Tool v0.42\n\n\tSaving logs please wait...\n'
 
 # Log naming
 brand=$(getprop ro.product.manufacturer) && brand=${brand// /-}
@@ -56,28 +56,28 @@ fi
 if  [[ -n "$native_partition_mountpoint" ]]; then
 	logs_native="$native_partition_mountpoint/$native_partition_remix_dir/$logs_src"
 	mkdir -p $logs_native
-	cp $logs_sdcard/$dmesg $logs_native $logs_sdcard/$lspci $logs_native $logs_sdcard/$logcat $logs_native $logs_sdcard/$lsusb $logs_native $logs_sdcard/$cpuinfo $logs_native
+	cp $logs_sdcard/$lsmod $logs_native $logs_sdcard/$dmesg $logs_native $logs_sdcard/$lspci $logs_native $logs_sdcard/$logcat $logs_native $logs_sdcard/$lsusb $logs_native $logs_sdcard/$cpuinfo $logs_native
 else
 	mkdir -p /mnt/media_rw/$native_partition_uuid
 	ntfs-3g $native_partition_path /mnt/media_rw/$native_partition_uuid
 	mount $native_partition_path /mnt/media_rw/$native_partition_uuid
 	logs_native="/mnt/media_rw/$native_partition_uuid/$native_partition_remix_dir/$logs_src"
 	mkdir -p $logs_native
-	cp $logs_sdcard/$dmesg $logs_native $logs_sdcard/$lspci $logs_native $logs_sdcard/$logcat $logs_native $logs_sdcard/$lsusb $logs_native $logs_sdcard/$cpuinfo $logs_native
+	cp $logs_sdcard/$lsmod $logs_native $logs_sdcard/$dmesg $logs_native $logs_sdcard/$lspci $logs_native $logs_sdcard/$logcat $logs_native $logs_sdcard/$lsusb $logs_native $logs_sdcard/$cpuinfo $logs_native
 fi
 # If booted from removable media make sure logs are copied to the REMIX_OS partition - Windows friendly.
 if [[ -n "$removable_boot_win_partition_path" ]]; then
 	if [[ -n "$removable_boot_win_partition_mountpoint" ]]; then
 		logs_removable_win="$removable_boot_win_partition_mountpoint/$logs_src"
 		mkdir -p $logs_removable_win
-		cp $logs_sdcard/$dmesg $logs_removable_win $logs_sdcard/$lspci $logs_removable_win $logs_sdcard/$logcat $logs_removable_win $logs_sdcard/$lsusb $logs_removable_win $logs_sdcard/$cpuinfo $logs_removable_win
+		cp $logs_sdcard/$lsmod $logs_removable_win $logs_sdcard/$dmesg $logs_removable_win $logs_sdcard/$lspci $logs_removable_win $logs_sdcard/$logcat $logs_removable_win $logs_sdcard/$lsusb $logs_removable_win $logs_sdcard/$cpuinfo $logs_removable_win
 	else
 		mkdir -p /mnt/media_rw/$removable_boot_win_partition_uuid
 		ntfs-3g $removable_boot_win_partition_path /mnt/media_rw/$removable_boot_win_partition_uuid
 		mount $removable_boot_win_partition_path /mnt/media_rw/$removable_boot_win_partition_uuid
 		logs_removable_win="/mnt/media_rw/$removable_boot_win_partition_uuid/$logs_src"
 		mkdir -p $logs_removable_win
-		cp $logs_sdcard/$dmesg $logs_removable_win $logs_sdcard/$lspci $logs_removable_win $logs_sdcard/$logcat $logs_removable_win $logs_sdcard/$lsusb $logs_removable_win $logs_sdcard/$cpuinfo $logs_removable_win
+		cp $logs_sdcard/$lsmod $logs_removable_win $logs_sdcard/$dmesg $logs_removable_win $logs_sdcard/$lspci $logs_removable_win $logs_sdcard/$logcat $logs_removable_win $logs_sdcard/$lsusb $logs_removable_win $logs_sdcard/$cpuinfo $logs_removable_win
 	fi
 fi
 
