@@ -2,6 +2,11 @@
 ## Feedback System & Troubleshooting Center repository
 
 ### **Check the detailed Wiki page for all the details - [Wiki](https://github.com/JideTechnology/Remix-OS-For-PC/wiki)**
+### Logtool.sh
+
+Script included in releases 3.0.207 and newer - Remix OS path - /system/bin/logtool.sh
+
+It's purpose is easy saving of all the log files useful in debugging and troubleshooting
 
 ***
 
