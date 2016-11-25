@@ -1,6 +1,11 @@
 # Remix-OS-For-PC
+## Feedback System & Troubleshooting Center repository
 
-## Introduction 
+### **Check the detailed Wiki page for all the details - [Wiki](https://github.com/JideTechnology/Remix-OS-For-PC/wiki)**
+
+***
+
+## Introduction to the operating system - Remix OS for PC
 Remix OS for PC allows you to run our PC optimized version of Android on any computer. Through a simple and quick setup process, enjoy millions of Android apps and games on your PC alongside the many intuitive and amazing PC features we’ve engineered into Remix OS. [Try it now!](http://www.jide.com/remixos-for-pc#downloadNow)
 
 ## Features
