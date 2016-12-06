@@ -1,16 +1,19 @@
 #!/system/bin/sh
-# Remix OS Log Tool v0.42 by Vioner
+# Remix OS Log Tool v0.5 by Vioner
 # Thanks a lot to Mohamed for thoroughly testing with me! I owe you moman2000 ! (XDA Forum user)
 #
 # Prerequisites:
-# - modified initrd.img (with custom init script - https://goo.gl/DSkjXT )
-# - running as root ex. sh /path/to/logtool.sh
-#
+# - Remix OS 3.0.207 or newer (boot_type feature works newer than 3.0.207)
+# - running as root
+
 # Features:
-# Saves dmesg,logcat,lspci,lsusb,cpuinfo to 3 locations:
+# 1. Lognames include essential environment info
+# 2. Saves logs: dmesg,logcat,lspci,lsmod,lsusb,cpuinfo to locations:
 # - /storage/emulated/0/RemixOS_Logs/Usergenerated
 # - X:/$native_partition_remix_dir/RemixOS_Logs/Usergenerated
 # - REMIX_OS:/RemixOS_Logs/Usergenerated - if booted from removable media
+
+# Usage: https://goo.gl/bsZcsq
 
 # Remove below comment to see script running line-by-line, command-by-command in terminal
 # set -x
@@ -20,19 +23,21 @@ mkdir -p /storage/emulated/0/RemixOS_Logs
 exec 2> /storage/emulated/0/RemixOS_Logs/Logtool_errors.log
 source /boot_info
 
-print '\n\tRemix OS Log Tool v0.42\n\n\tSaving logs please wait...\n'
+print '\n\tRemix OS Log Tool v0.5\n\n\tSaving logs please wait...\n'
 
 # Log naming
 brand=$(getprop ro.product.manufacturer) && brand=${brand// /-}
 model=$(getprop ro.product.model) && model=${model// /-}
 version=$(getprop ro.build.remixos.version) && version=${version// /-}
 system_arch=$(getprop ro.product.cpu.abi) && system_arch=${system_arch// /-}
-logcat="logcat_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-dmesg="dmesg_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-lsmod="lsmod_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-lspci="lspci_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-lsusb="lsusb_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
-cpuinfo="cpuinfo_BOOT-COMPLETE_${brand}_${model}_${version}_${system_arch}_$(date +%F_%H-%M).txt"
+pattern="${boot_type}_BOOT-COMPLETE_${brand}_${model}_${version}-${system_arch}_$(date +%F_%H-%M).txt"
+
+logcat="logcat_${pattern}"
+dmesg="dmesg_${pattern}"
+lsmod="lsmod_${pattern}"
+lspci="lspci_${pattern}"
+lsusb="lsusb_${pattern}"
+cpuinfo="cpuinfo_${pattern}"
 
 # Set logs location for Internal Storage
 logs_src="RemixOS_Logs/Usergenerated/${brand}_${model}"
@@ -91,3 +96,4 @@ if [[ -n "$removable_boot_win_partition_path" ]]; then
 fi
 
 print "\n\tIf you have feedback for us, be sure to visit our Remix-OS-For-PC GitHub repository and use the new logs there.\n\tRemix-OS-For-PC GitHub repository: https://goo.gl/ulxY75\n"
+exit 0
