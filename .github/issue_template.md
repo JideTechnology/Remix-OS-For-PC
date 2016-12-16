@@ -1,3 +1,4 @@
+Please check Wiki tab if you're a newcomer or if you need more information.
 ## SCHEME FOR ISSUE TITLE (^above^ this comment section):
 
 For hardware/booting/drivers/peripherals/specific-device related issues:
