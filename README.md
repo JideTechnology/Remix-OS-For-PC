@@ -1,3 +1,8 @@
+# Remix-OS-for-PC project DISCONTINUED
+
+"[...]We’ll be restructuring our approach to Remix OS and transitioning away from the consumer space. As a result, development on all existing products such as Remix OS for PC as well as products in our pipeline such as Remix IO and IO+ will be discontinued[...]"
+http://www.jide.com/
+
 # Remix-OS-For-PC
 ## Feedback System & Troubleshooting Center repository
 
